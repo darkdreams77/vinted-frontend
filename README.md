@@ -1,73 +1,60 @@
-# React + TypeScript + Vite
+# Vinted Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Ce projet est un exercice frontend inspiré de Vinted, construit avec React, TypeScript et Vite.
 
-Currently, two official plugins are available:
+## Description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+L'application consomme une API pour afficher des annonces de produits et proposer une navigation entre :
 
-## React Compiler
+- une page d'accueil qui liste les offres
+- une page de détail d'annonce (`/offer/:id`)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+La structure utilise un layout commun, un `Hero`, des `Card` pour les offres, et un système de chargement avec des squelettes.
 
-## Expanding the ESLint configuration
+## Fonctionnalités
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Affichage des offres sur la page d'accueil
+- Navigation vers les détails d'une offre via React Router
+- Requêtes HTTP avec `axios`
+- Gestion du chargement via un hook personnalisé `useAsyncEffect`
+- Mise en forme avec Tailwind CSS
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Structure du projet
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- `src/pages/Home.tsx` : page principale avec liste d'annonces
+- `src/pages/Offer.tsx` : page de détail d'une offre
+- `src/components/` : composants réutilisables (`Card`, `Hero`, `Layout`, `Header`, etc.)
+- `src/services/` : accès aux API (`getOffers`, `getOffer`)
+- `src/types/` : types TypeScript pour les données
+- `src/helpers/` : utilitaires comme `formatCurrency`
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Installation
+
+```bash
+pnpm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Commandes utiles
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+pnpm dev       # démarre le serveur de développement
+pnpm build     # compile et build l'application
+pnpm preview   # prévisualise le build de production
+pnpm lint      # lance ESLint sur le projet
 ```
+
+## Dépendances principales
+
+- `react` / `react-dom`
+- `react-router-dom`
+- `axios`
+- `tailwindcss`
+- `@tailwindcss/vite`
+- `react-icons`
+- `clsx`
+
+## Notes
+
+- Le projet est configuré avec TypeScript et Vite.
+- La page d'accueil utilise un hook personnalisé pour charger les données côté client.
+- L'application est prête à être enrichie avec un vrai design Vinted et une gestion complète des filtres / recherches.

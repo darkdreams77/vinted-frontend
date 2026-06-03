@@ -1,11 +1,11 @@
 import { useState } from "react";
+
 import { Hero } from "../components/Hero";
+import { Card } from "../components/Card";
 import useAsyncEffect from "../hooks/useAsyncEffect";
 import { getOffers } from "../services/getOffers";
+
 import type { OffersDataType } from "../types";
-import { Link } from "react-router-dom";
-import { formatEuro } from "../helpers/formatCurrency";
-import { Card } from "../components/Card";
 
 export const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
