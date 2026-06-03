@@ -11,7 +11,7 @@ type CardProps = {
   productDetails: ProductDetailsType[];
 };
 
-export const Card = ({
+export const HomeCard = ({
   productId,
   userAvatarUrl,
   username,

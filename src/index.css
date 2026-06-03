@@ -373,15 +373,33 @@
   border-radius: var(--radius-sm);
   padding: calc(var(--spacing) * 1.5) calc(var(--spacing) * 3);
   cursor: pointer;
-  font-size: var(--text-xs);
+  transition: all 0.3s var(--ease-smooth);
 }
 
 @utility outlined {
   border: 1px solid var(--color-lagoon-500);
   color: var(--color-lagoon-500);
+
+  &:hover {
+    background-color: var(--color-lagoon-50);
+  }
 }
 
-@utility plain {
+@utility filled {
   background-color: var(--color-lagoon-500);
   color: var(--color-canvas-white);
+  transition: all 0.3s var(--ease-smooth);
+
+  &:hover {
+    background-color: var(--color-lagoon-400);
+  }
+}
+
+@utility blank {
+  background-color: var(--color-canvas-white);
+  color: var(--color-lagoon-500);
+
+  &:hover {
+    background-color: var(--color-lagoon-50);
+  }
 }

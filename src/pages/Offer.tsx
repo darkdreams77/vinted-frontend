@@ -1,9 +1,13 @@
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+
 import useAsyncEffect from "../hooks/useAsyncEffect";
-import { useState } from "react";
-import type { OfferType } from "../types";
 import { getOffer } from "../services/getOffer";
+
+import type { OfferType } from "../types";
+import { TbChevronLeft } from "react-icons/tb";
+import { OfferCard } from "../components/OfferCard";
 
 export const Offer = () => {
   const { id } = useParams();
@@ -21,23 +25,39 @@ export const Offer = () => {
 
   return (
     <div>
-      <div className="my-8">
-        <Link to="/">Go back home</Link>
+      <div className="my-10">
+        <Link to="/" className="flex items-center gap-2">
+          <TbChevronLeft /> Retour à l'accueil
+        </Link>
       </div>
 
       {isLoading ? (
         <div className="flex items-center justify-between gap-8">
-          <div className="skeleton w-full h-42"></div>
-          <div className="skeleton w-full h-42"></div>
-          <div className="skeleton w-full h-42"></div>
-          <div className="skeleton w-full h-42"></div>
+          <div className="skeleton w-full h-150"></div>
+          <div className="skeleton w-full h-150"></div>
         </div>
       ) : (
-        <>
-          {offerData?.product_name}
-
-          <img src={offerData?.product_image.secure_url} />
-        </>
+        <div className="flex gap-10 justify-around items-stretch">
+          {offerData && (
+            <>
+              <img
+                src={offerData.product_image.secure_url}
+                className="h-150 object-cover rounded-sm"
+              />
+              <OfferCard
+                id={offerData._id}
+                productPrice={offerData.product_price}
+                productDetails={offerData.product_details}
+                productTitle={offerData.product_name}
+                productDescription={offerData.product_description}
+                {...(offerData.owner.account.avatar && {
+                  userAvatarUrl: offerData.owner.account.avatar.secure_url,
+                })}
+                username={offerData.owner.account.username}
+              />
+            </>
+          )}
+        </div>
       )}
     </div>
   );

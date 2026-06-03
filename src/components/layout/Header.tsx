@@ -1,18 +1,13 @@
 import { Link, matchPath, useLocation } from "react-router-dom";
+import { TbCameraPlus, TbSearch } from "react-icons/tb";
 
 import { Container } from "./Container";
 
 import logo from "../../assets/img/logo.svg";
-import { TbCameraPlus, TbSearch } from "react-icons/tb";
-import { useEffect } from "react";
 
 export const Header = () => {
   const location = useLocation();
   const match = matchPath("/", location.pathname);
-
-  useEffect(() => {
-    console.log("match", match);
-  }, [match, location.pathname]);
 
   return (
     <header className="sticky">
@@ -36,10 +31,10 @@ export const Header = () => {
             </button>
           </div>
           <div className="flex gap-2">
-            <button className="button outlined">S'inscrire</button>
-            <button className="button outlined">Se connecter</button>
+            <button className="button outlined text-xs">S'inscrire</button>
+            <button className="button outlined text-xs">Se connecter</button>
           </div>
-          <button className="button plain">Vends tes articles</button>
+          <button className="button filled text-xs">Vends tes articles</button>
         </Container>
       </div>
       {/* bottom header */}

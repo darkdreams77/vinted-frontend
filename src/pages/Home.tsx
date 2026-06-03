@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { Hero } from "../components/Hero";
-import { Card } from "../components/Card";
+import { HomeCard } from "../components/HomeCard";
 import useAsyncEffect from "../hooks/useAsyncEffect";
 import { getOffers } from "../services/getOffers";
 
@@ -16,7 +16,6 @@ export const Home = () => {
   useAsyncEffect(async () => {
     const result = await getOffers();
     setOffersData(result);
-    console.log("result.data", result);
     setIsLoading(false);
   }, []);
 
@@ -35,7 +34,7 @@ export const Home = () => {
         ) : (
           <ul className="flex flex-wrap gap-4">
             {offersData?.offers.map((offer) => (
-              <Card
+              <HomeCard
                 key={offer._id}
                 productId={offer._id}
                 {...(offer.owner.account.avatar && {
