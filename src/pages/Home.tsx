@@ -5,7 +5,7 @@ import { HomeCard } from "../components/HomeCard";
 import useAsyncEffect from "../hooks/useAsyncEffect";
 import { getOffers } from "../services/getOffers";
 
-import type { OffersDataType } from "../types";
+import type { OffersDataType } from "../types/offers";
 
 export const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -16,6 +16,7 @@ export const Home = () => {
   useAsyncEffect(async () => {
     const result = await getOffers();
     setOffersData(result);
+    console.log("result", result);
     setIsLoading(false);
   }, []);
 

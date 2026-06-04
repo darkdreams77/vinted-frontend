@@ -1,5 +1,6 @@
+import React from "react";
 import { formatEuro } from "../helpers/formatCurrency";
-import type { ProductDetailsType } from "../types";
+import type { ProductDetailsType } from "../types/offers";
 
 export type OfferCardProps = {
   productPrice: number;
@@ -21,23 +22,28 @@ export const OfferCard = ({
   username,
 }: OfferCardProps) => {
   return (
-    <div
+    <aside
       className="bg-white rounded-sm border border-zinc-200 w-100 p-8 flex flex-col justify-between"
       id={id}
     >
       <div>
         <h2 className="text-2xl mb-6">{formatEuro(productPrice)}</h2>
         <ul>
-          {productDetails.map((item, index) => (
-            <li key={index} className="flex justify-between items-start mb-0.5">
-              <span className="w-1/2 text-sm text-zinc-400">
-                {Object.keys(item)}
-              </span>
-              <span className="w-1/2 text-sm text-zinc-800">
-                {Object.values(item)}
-              </span>
-            </li>
-          ))}
+          {productDetails
+            .filter((item) => Object.values(item).some((value) => value !== ""))
+            .map((item, index) => (
+              <li
+                key={index}
+                className="flex justify-between items-start mb-0.5"
+              >
+                <span className="w-1/2 text-sm text-zinc-400">
+                  {Object.keys(item)}
+                </span>
+                <span className="w-1/2 text-sm text-zinc-800">
+                  {Object.values(item)}
+                </span>
+              </li>
+            ))}
         </ul>
       </div>
       <div className="border-b border-b-zinc-300"></div>
@@ -58,6 +64,6 @@ export const OfferCard = ({
       <div className="mt-4">
         <button className="button filled w-full">Acheter</button>
       </div>
-    </div>
+    </aside>
   );
 };

@@ -1,13 +1,24 @@
-import { Link, matchPath, useLocation } from "react-router-dom";
+import { Link, matchPath, useLocation, useNavigate } from "react-router-dom";
 import { TbCameraPlus, TbSearch } from "react-icons/tb";
+import Cookies from "js-cookie";
 
 import { Container } from "./Container";
 
 import logo from "../../assets/img/logo.svg";
+import { useAuthenticated } from "../../hooks/useAuthenticated";
 
 export const Header = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const match = matchPath("/", location.pathname);
+  const isConnected = useAuthenticated();
+
+  const signin = () => navigate("/signup");
+
+  const unregister = () => {
+    Cookies.remove("oauth.access.token");
+    navigate("/");
+  };
 
   return (
     <header className="sticky">
@@ -30,10 +41,18 @@ export const Header = () => {
               <TbCameraPlus className="text-lagoon-500" size={24} />
             </button>
           </div>
-          <div className="flex gap-2">
-            <button className="button outlined text-xs">S'inscrire</button>
-            <button className="button outlined text-xs">Se connecter</button>
-          </div>
+          {isConnected ? (
+            <button className="button filled text-xs" onClick={unregister}>
+              Se déconnecter
+            </button>
+          ) : (
+            <div className="flex gap-2">
+              <button className="button outlined text-xs" onClick={signin}>
+                S'inscrire
+              </button>
+              <button className="button outlined text-xs">Se connecter</button>
+            </div>
+          )}
           <button className="button filled text-xs">Vends tes articles</button>
         </Container>
       </div>

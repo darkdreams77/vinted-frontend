@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import useAsyncEffect from "../hooks/useAsyncEffect";
 import { getOffer } from "../services/getOffer";
 
-import type { OfferType } from "../types";
+import type { OfferType } from "../types/offers";
 import { TbChevronLeft } from "react-icons/tb";
 import { OfferCard } from "../components/OfferCard";
 

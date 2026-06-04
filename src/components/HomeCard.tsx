@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import type { ProductDetailsType } from "../types";
+import type { ProductDetailsType } from "../types/offers";
 import { formatEuro } from "../helpers/formatCurrency";
 
 type CardProps = {

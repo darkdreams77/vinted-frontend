@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { OffersDataType } from "../types";
+import type { OffersDataType } from "../types/offers";
 
 const URL = import.meta.env.VITE_BFF_URI;
 
