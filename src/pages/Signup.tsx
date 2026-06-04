@@ -6,6 +6,7 @@ import { Checkbox } from "../components/atoms/Checkbox";
 import { Input } from "../components/atoms/Input";
 import { InputFile } from "../components/atoms/InputFile";
 import { postSignup } from "../services/postSignup";
+import { refresh } from "../helpers/refresh";
 
 export const Signup = () => {
   const navigate = useNavigate();
@@ -58,6 +59,7 @@ export const Signup = () => {
     if (createdUser) {
       Cookies.set("oauth.access.token", createdUser.token, { expires: 7 });
       navigate("/");
+      refresh();
     }
   };
 

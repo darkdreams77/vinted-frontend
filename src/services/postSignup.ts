@@ -1,11 +1,11 @@
 import axios from "axios";
-import type { UserCreatedType, UserSignupType } from "../types/users";
+import type { UserType, UserSignupType } from "../types/users";
 
 const URL = import.meta.env.VITE_BFF_URI;
 
-export const postSignup: (
+export const postSignup: (user: UserSignupType) => Promise<UserType> = async (
   user: UserSignupType,
-) => Promise<UserCreatedType> = async (user: UserSignupType) => {
+) => {
   const formData = new FormData();
 
   Object.entries(user).forEach(([key, value]) => {

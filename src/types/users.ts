@@ -8,11 +8,16 @@ export type UserSignupType = {
   avatar?: File;
 };
 
-export type UserCreatedType = {
+export type UserType = {
   account: {
     username: string;
     avatar?: ImageType;
   };
   token: string;
   _id: string;
+};
+
+export type UserLoginType = {
+  email: string;
+  password: string;
 };

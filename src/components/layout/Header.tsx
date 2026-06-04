@@ -6,6 +6,7 @@ import { Container } from "./Container";
 
 import logo from "../../assets/img/logo.svg";
 import { useAuthenticated } from "../../hooks/useAuthenticated";
+import { refresh } from "../../helpers/refresh";
 
 export const Header = () => {
   const location = useLocation();
@@ -13,11 +14,13 @@ export const Header = () => {
   const match = matchPath("/", location.pathname);
   const isConnected = useAuthenticated();
 
-  const signin = () => navigate("/signup");
+  const signup = () => navigate("/signup");
+  const login = () => navigate("/login");
 
   const unregister = () => {
     Cookies.remove("oauth.access.token");
     navigate("/");
+    refresh();
   };
 
   return (
@@ -42,15 +45,17 @@ export const Header = () => {
             </button>
           </div>
           {isConnected ? (
-            <button className="button filled text-xs" onClick={unregister}>
+            <button className="button outlined text-xs" onClick={unregister}>
               Se déconnecter
             </button>
           ) : (
             <div className="flex gap-2">
-              <button className="button outlined text-xs" onClick={signin}>
+              <button className="button outlined text-xs" onClick={signup}>
                 S'inscrire
               </button>
-              <button className="button outlined text-xs">Se connecter</button>
+              <button className="button outlined text-xs" onClick={login}>
+                Se connecter
+              </button>
             </div>
           )}
           <button className="button filled text-xs">Vends tes articles</button>
