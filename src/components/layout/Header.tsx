@@ -19,8 +19,8 @@ export const Header = () => {
 
   const unregister = () => {
     Cookies.remove("oauth.access.token");
-    navigate("/");
-    refresh();
+    if (match) refresh();
+    else navigate("/");
   };
 
   return (

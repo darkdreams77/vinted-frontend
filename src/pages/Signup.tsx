@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
 import { Checkbox } from "../components/atoms/Checkbox";
 import { Input } from "../components/atoms/Input";
 import { InputFile } from "../components/atoms/InputFile";
 import { postSignup } from "../services/postSignup";
-import { refresh } from "../helpers/refresh";
 
 export const Signup = () => {
   const navigate = useNavigate();
@@ -59,12 +58,11 @@ export const Signup = () => {
     if (createdUser) {
       Cookies.set("oauth.access.token", createdUser.token, { expires: 7 });
       navigate("/");
-      refresh();
     }
   };
 
   return (
-    <div className="mt-20 w-sm mx-auto">
+    <div className="mt-20 w-100 mx-auto">
       <h1 className="text-3xl mb-20 text-center">S'inscrire</h1>
 
       <form onSubmit={handleSubmit}>
@@ -115,6 +113,10 @@ export const Signup = () => {
         <button type="submit" className="button filled w-full py-4">
           S'inscrire
         </button>
+
+        <div className="mt-8 text-lagoon-500 text-sm text-center">
+          <Link to="/login">Tu as déjà un compte ? Connecte-toi !</Link>
+        </div>
       </form>
     </div>
   );

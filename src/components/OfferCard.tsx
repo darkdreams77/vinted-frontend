@@ -1,4 +1,3 @@
-import React from "react";
 import { formatEuro } from "../helpers/formatCurrency";
 import type { ProductDetailsType } from "../types/offers";
 

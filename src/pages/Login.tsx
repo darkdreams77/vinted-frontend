@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
 import { Input } from "../components/atoms/Input";
 import { postLogin } from "../services/postLogin";
-import { refresh } from "../helpers/refresh";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -35,12 +34,11 @@ export const Login = () => {
     if (connectedUser) {
       Cookies.set("oauth.access.token", connectedUser.token, { expires: 7 });
       navigate("/");
-      refresh();
     }
   };
 
   return (
-    <div className="mt-20 w-sm mx-auto">
+    <div className="mt-20 w-100 mx-auto">
       <h1 className="text-3xl mb-20 text-center">Se connecter</h1>
 
       <form onSubmit={handleSubmit}>
@@ -66,6 +64,10 @@ export const Login = () => {
         <button type="submit" className="button filled w-full py-4">
           Se connecter
         </button>
+
+        <div className="mt-8 text-lagoon-500 text-sm text-center">
+          <Link to="/signup">Pas encore de compte ? Inscris-toi !</Link>
+        </div>
       </form>
     </div>
   );
