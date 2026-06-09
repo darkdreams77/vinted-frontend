@@ -1,11 +1,18 @@
-import { Link, matchPath, useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import {
+  Link,
+  matchPath,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 import { TbCameraPlus, TbSearch } from "react-icons/tb";
 import Cookies from "js-cookie";
 
 import { Container } from "./Container";
-
 import { Toggle } from "./Toggle";
 import { Range } from "./Range";
+
 import { useAuthenticated } from "../../hooks/useAuthenticated";
 import { refresh } from "../../helpers/refresh";
 import logo from "../../assets/img/logo.svg";
@@ -14,6 +21,7 @@ export const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const isConnected = useAuthenticated();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const match = matchPath("/", location.pathname);
 
@@ -25,6 +33,17 @@ export const Header = () => {
     Cookies.remove("oauth.access.token");
     if (match) refresh();
     else navigate("/");
+  };
+
+  const [title, setTitle] = useState("");
+
+  const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
+
+    const nextSearchParams = new URLSearchParams(searchParams);
+    nextSearchParams.set("title", e.target.value);
+
+    setSearchParams(nextSearchParams);
   };
 
   return (
@@ -39,10 +58,12 @@ export const Header = () => {
             <TbSearch className="text-zinc-400" size={24} />
             <input
               type="text"
-              name="search"
-              id="search"
+              name="title"
+              id="title"
               className="w-full focus:focus-ring"
               placeholder="Rechercher un article ou un membre"
+              value={title}
+              onChange={onChangeTitle}
             />
             <button className="cursor-pointer">
               <TbCameraPlus className="text-lagoon-500" size={24} />

@@ -66,7 +66,7 @@ export const Pagination = ({
   }: PropsWithChildren<{ onClick: () => void; active?: boolean }>) => (
     <button
       className={cn(
-        "border border-lagoon-500 text-lagoon-500 px-2 py-1 rounded-sm",
+        "border border-lagoon-500 text-lagoon-500 px-2 py-1 rounded-sm cursor-pointer",
         active ? "font-bold border-2" : "",
       )}
       onClick={onClick}

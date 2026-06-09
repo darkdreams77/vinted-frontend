@@ -15,7 +15,6 @@ export const postOffer: (
     const result = await axios.post(`${URL}/offer/publish`, formData, {
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "multipart/form-data",
       },
     });
     return result.data || [];

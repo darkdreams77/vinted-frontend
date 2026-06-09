@@ -72,13 +72,15 @@ export const Home = () => {
               ))}
             </ul>
 
-            <Pagination
-              setPage={setPage}
-              limit={LIMIT}
-              pagesTab={pagesTab}
-              data={offersData!}
-              currentPage={page}
-            />
+            {offersData && (
+              <Pagination
+                setPage={setPage}
+                limit={LIMIT}
+                pagesTab={pagesTab}
+                data={offersData}
+                currentPage={page}
+              />
+            )}
           </>
         )}
       </main>

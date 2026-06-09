@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
 import { Input } from "../components/atoms/Input";
@@ -7,6 +7,7 @@ import { postLogin } from "../services/postLogin";
 
 export const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -33,7 +34,7 @@ export const Login = () => {
 
     if (connectedUser) {
       Cookies.set("oauth.access.token", connectedUser.token, { expires: 7 });
-      navigate("/");
+      location.state ? navigate(location.state.from) : navigate("/");
     }
   };
 

@@ -1,5 +1,5 @@
 import { useState, type ChangeEvent } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 
 import { Input } from "../components/atoms/Input";
 import { InputFileOffer } from "../components/atoms/InputFileOffer";
@@ -12,10 +12,7 @@ type PublishProps = {};
 
 export const Publish = ({}: PublishProps) => {
   const navigate = useNavigate();
-  const location = useLocation();
   const token = useToken();
-
-  if (!token) navigate(location.state.from ?? "/");
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -98,7 +95,7 @@ export const Publish = ({}: PublishProps) => {
     }
   };
 
-  return (
+  return token ? (
     <div className="mt-20 w-200 mx-auto">
       <h1 className="text-3xl mb-20 text-center">Vends ton article</h1>
 
@@ -232,5 +229,7 @@ export const Publish = ({}: PublishProps) => {
         </button>
       </form>
     </div>
+  ) : (
+    <Navigate to="/login" state={{ from: "/publish" }} />
   );
 };
