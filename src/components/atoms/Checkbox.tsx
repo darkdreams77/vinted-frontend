@@ -1,4 +1,5 @@
 import type { ChangeEvent } from "react";
+import { cn } from "../../helpers/cn";
 
 type CheckboxProps = {
   label: string;
@@ -6,6 +7,7 @@ type CheckboxProps = {
   name: string;
   checked?: boolean;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  className?: string;
 };
 
 export const Checkbox = ({
@@ -14,9 +16,10 @@ export const Checkbox = ({
   name,
   checked,
   onChange,
+  className,
 }: CheckboxProps) => {
   return (
-    <div className="flex items-center gap-2">
+    <div className={cn("flex items-center gap-2", className ? className : "")}>
       <input
         type="checkbox"
         id={id}

@@ -1,24 +1,18 @@
 import axios from "axios";
-import type { UserType, UserSignupType } from "../types/users";
+import type { UserType } from "../types/users";
 
 const URL = import.meta.env.VITE_BFF_URI;
 
-export const postSignup: (user: UserSignupType) => Promise<UserType> = async (
-  user: UserSignupType,
+export const postSignup: (formData: FormData) => Promise<UserType> = async (
+  // user: UserSignupType,
+  formData: FormData,
 ) => {
-  const formData = new FormData();
-
-  Object.entries(user).forEach(([key, value]) => {
-    if (value === undefined) return;
-
-    if (value instanceof File) {
-      formData.set(key, value);
-      return;
+  try {
+    const result = await axios.post(`${URL}/user/signup`, formData);
+    return result.data || [];
+  } catch (e) {
+    if (e instanceof Error) {
+      console.log(e.message);
     }
-
-    formData.set(key, String(value));
-  });
-
-  const result = await axios.post(`${URL}/user/signup`, formData);
-  return result.data || [];
+  }
 };

@@ -4,18 +4,22 @@ import Cookies from "js-cookie";
 
 import { Container } from "./Container";
 
-import logo from "../../assets/img/logo.svg";
+import { Toggle } from "./Toggle";
+import { Range } from "./Range";
 import { useAuthenticated } from "../../hooks/useAuthenticated";
 import { refresh } from "../../helpers/refresh";
+import logo from "../../assets/img/logo.svg";
 
 export const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const match = matchPath("/", location.pathname);
   const isConnected = useAuthenticated();
+
+  const match = matchPath("/", location.pathname);
 
   const signup = () => navigate("/signup");
   const login = () => navigate("/login");
+  const publish = () => navigate("/publish");
 
   const unregister = () => {
     Cookies.remove("oauth.access.token");
@@ -58,15 +62,21 @@ export const Header = () => {
               </button>
             </div>
           )}
-          <button className="button filled text-xs">Vends tes articles</button>
+          <button className="button filled text-xs" onClick={publish}>
+            Vends tes articles
+          </button>
         </Container>
       </div>
       {/* bottom header */}
       {match && (
         <div>
-          <Container className="flex items-center justify-around py-2">
-            <div>Trier par prix</div>
-            <div>Prix entre</div>
+          <Container className="flex items-center justify-between py-2">
+            <div className="flex gap-2">
+              <Toggle label="Trier par prix : " />
+            </div>
+            <div className="flex justify-center w-1/2 mt-4 flex-nowrap gap-6">
+              <Range label="Prix entre : " />
+            </div>
           </Container>
         </div>
       )}

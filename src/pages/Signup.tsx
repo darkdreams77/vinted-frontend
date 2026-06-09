@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 
 import { Checkbox } from "../components/atoms/Checkbox";
 import { Input } from "../components/atoms/Input";
-import { InputFile } from "../components/atoms/InputFile";
+import { InputFileAvatar } from "../components/atoms/InputFileAvatar";
 import { postSignup } from "../services/postSignup";
 
 export const Signup = () => {
@@ -38,22 +38,16 @@ export const Signup = () => {
 
   const onChangeAvatar = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.files;
-    console.log("value", value);
     if (value) setAvatar(value[0]);
   };
 
-  const handleSubmit = async (e: React.SubmitEvent) => {
+  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const userToCreate = {
-      username,
-      email,
-      password,
-      avatar,
-      newsletter: acceptingNewsletter,
-    };
+    const data = e.target;
+    const formData = new FormData(data);
 
-    const createdUser = await postSignup(userToCreate);
+    const createdUser = await postSignup(formData);
 
     if (createdUser) {
       Cookies.set("oauth.access.token", createdUser.token, { expires: 7 });
@@ -94,7 +88,12 @@ export const Signup = () => {
           onChange={onChangePassword}
         />
 
-        <InputFile id="avatar" name="avatar" onChange={onChangeAvatar} />
+        <InputFileAvatar
+          id="avatar"
+          name="avatar"
+          onChange={onChangeAvatar}
+          avatar={avatar}
+        />
 
         <Checkbox
           label="S'inscrire à notre newsletter"

@@ -33,10 +33,12 @@ export const HomeCard = ({
           <span className="text-xs text-zinc-400">{username}</span>
         </div>
 
-        <img
-          src={productImgUrl}
-          className="w-full h-100 object-cover rounded-md"
-        />
+        <div className="w-full h-100 overflow-hidden">
+          <img
+            src={productImgUrl}
+            className="w-full h-100 object-cover rounded-md hover:scale-105 transition-all"
+          />
+        </div>
 
         <ul className="p-2 text-xs">
           <li>{formatEuro(productPrice)}</li>

@@ -1,44 +1,37 @@
-import { cn } from "../../helpers/cn";
-
-type InputProps = {
-  type: React.HTMLInputTypeAttribute;
+type TextareaProps = {
   placeholder: string;
   name: string;
   id: string;
   required?: boolean;
   value: HTMLInputElement["value"];
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  rows?: number;
   label?: string;
-  className?: string;
 };
 
-export const Input = ({
+export const Textarea = ({
   label,
-  type,
   placeholder,
   name,
   id,
   value,
   onChange,
   required = false,
-  className,
-}: InputProps) => {
+  rows = 5,
+}: TextareaProps) => {
   return (
     <>
       {label && <label htmlFor={name}>{label}</label>}
-      <input
-        type={type}
+      <textarea
         placeholder={placeholder}
         name={name}
         id={id}
         required={required}
+        rows={rows}
         autoComplete="on"
         value={value}
         onChange={onChange}
-        className={cn(
-          "border-b border-b-amber w-full p-2 focus:focus-ring mb-10 focus:border-b-transparent col-span-2",
-          className ? className : "",
-        )}
+        className="border-b border-b-amber w-full p-2 focus:focus-ring focus:border-b-transparent col-span-2"
       />
     </>
   );

@@ -6,6 +6,12 @@ const URL = import.meta.env.VITE_BFF_URI;
 export const getOffer: (id: string) => Promise<OfferType> = async (
   id: string,
 ) => {
-  const result = await axios.get(`${URL}/offers/${id}`);
-  return result.data || [];
+  try {
+    const result = await axios.get(`${URL}/offers/${id}`);
+    return result.data || [];
+  } catch (e) {
+    if (e instanceof Error) {
+      console.log(e.message);
+    }
+  }
 };

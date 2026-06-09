@@ -21,7 +21,7 @@ export const Login = () => {
     setPassword(value);
   };
 
-  const handleSubmit = async (e: React.SubmitEvent) => {
+  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const userToConnect = {
