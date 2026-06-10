@@ -39,7 +39,7 @@ export const Payment = () => {
           productId={productId}
           protectionFees={protectionFees}
           shippingFees={shippingFees}
-          price={price}
+          productPrice={price}
         />
       </Elements>
     </>
