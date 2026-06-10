@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { formatEuro } from "../helpers/formatCurrency";
 import type { ProductDetailsType } from "../types/offers";
 
@@ -20,6 +21,26 @@ export const OfferCard = ({
   userAvatarUrl,
   username,
 }: OfferCardProps) => {
+  const navigate = useNavigate();
+
+  const price = productPrice;
+  const protectionFees: number = Number((price / 10).toFixed(2));
+  const shippingFees = (protectionFees * 2).toFixed(2);
+  const total = Number(price) + Number(protectionFees) + Number(shippingFees);
+
+  const buyOffer = () => {
+    navigate(`/payment`, {
+      state: {
+        productId: id,
+        productTitle: productTitle,
+        totalPrice: total,
+        protectionFees: protectionFees,
+        shippingFees: shippingFees,
+        price: productPrice,
+      },
+    });
+  };
+
   return (
     <aside
       className="bg-white rounded-sm border border-zinc-200 w-100 p-8 flex flex-col justify-between"
@@ -61,7 +82,9 @@ export const OfferCard = ({
         </div>
       </div>
       <div className="mt-4">
-        <button className="button filled w-full">Acheter</button>
+        <button className="button filled w-full" onClick={buyOffer}>
+          Acheter
+        </button>
       </div>
     </aside>
   );
